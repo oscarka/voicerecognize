@@ -1,0 +1,28 @@
+# 核心依赖
+openai-whisper>=20231117
+numpy<2
+torch>=2.0.0
+torchaudio>=2.0.0
+
+# 音频处理
+ffmpeg-python>=0.2.0
+soundfile>=0.12.1
+
+# 系统监控
+psutil>=5.9.0
+
+# 说话人分离 (可选)
+pyannote.audio>=3.0.0
+
+# 其他工具
+tqdm>=4.64.0
+requests>=2.28.0
+huggingface-hub>=0.13.0
+
+# FireRedASR相关 (可选)
+cn2an>=0.5.23
+kaldiio>=2.18.0
+kaldi_native_fbank>=1.15
+peft>=0.13.2
+sentencepiece
+transformers>=4.46.3 
