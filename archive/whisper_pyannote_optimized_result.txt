@@ -1,0 +1,174 @@
+=== Whisper + Pyannote 优化测试结果 ===
+
+音频文件: short_test_audio.wav
+说话人数量: 2
+语音片段数: 13
+Whisper模型: base
+Pyannote模型: pyannote/speaker-diarization-3.1
+
+优化设置:
+  min_segment_duration: 2.0
+  forced_language: zh
+  fp16_disabled: True
+
+处理时间:
+  whisper_load: 1.51秒
+  pyannote_load: 3.55秒
+  diarization: 165.14秒
+  total_transcription: 18.77秒
+
+转录结果:
+==================================================
+[22.2s - 26.7s] SPEAKER_01: 我想那一下就是我们家老人有高喜糖高喜压
+[26.9s - 29.1s] SPEAKER_01: 現在就算是人牙頭
+[29.5s - 37.4s] SPEAKER_01: 我们再去医院看了一下说是牙有一个牙坏了要拔但是他现在血糖血还没控得下来
+[42.0s - 44.9s] SPEAKER_00: 好的要等其他行程当初
+[45.4s - 50.8s] SPEAKER_01: 就许这个要控制住在时间的牙肯和这种情况下它能吃点什么药吗
+[54.0s - 63.6s] SPEAKER_00: 那您當時去到醫院裡醫生給您所謂的控制的藥理有設計到指頭或者是膠炎的藥物嗎
+[64.3s - 70.8s] SPEAKER_01: 没有给我们开任何用就说要回来把写汤写就把酱炸来然后再去拔牙
+[71.3s - 75.4s] SPEAKER_00: 那你现在再做积极的血压血糖的调整吗
+[75.8s - 83.5s] SPEAKER_01: 是啊,學長姐糖都下來了所以要把那個S7.0也要停藥宇宙我們還沒到時間
+[86.9s - 99.1s] SPEAKER_00: 您現在確認您現在的牙桶是絕對的牙齒的問題而不是比如說心臟疾病、膽痔疾病等等造成了一些牽扯痛 是吧
+[100.7s - 106.3s] SPEAKER_01: 如果做成千扯痛的话,会有其他的感觉吗?
+[108.3s - 112.6s] SPEAKER_00: 但是你需要除外新港新角兔或者其他的一些
+[114.8s - 118.3s] SPEAKER_00: 一些放手通或者是牵扯到的一些桶套
+
+==================================================
+JSON格式结果:
+{
+  "audio_file": "short_test_audio.wav",
+  "total_speakers": 2,
+  "total_segments": 13,
+  "whisper_model": "base",
+  "pyannote_model": "pyannote/speaker-diarization-3.1",
+  "optimizations": {
+    "min_segment_duration": 2.0,
+    "forced_language": "zh",
+    "fp16_disabled": true
+  },
+  "processing_times": {
+    "whisper_load": 1.5121328830718994,
+    "pyannote_load": 3.5469398498535156,
+    "diarization": 165.13760590553284,
+    "total_transcription": 18.771714210510254
+  },
+  "transcriptions": [
+    {
+      "segment_id": 0,
+      "start": 22.238468750000003,
+      "end": 26.65971875,
+      "speaker": "SPEAKER_01",
+      "text": "我想那一下就是我们家老人有高喜糖高喜压",
+      "language": "zh",
+      "transcribe_time": 1.8364689350128174
+    },
+    {
+      "segment_id": 1,
+      "start": 26.91284375,
+      "end": 29.07284375,
+      "speaker": "SPEAKER_01",
+      "text": "現在就算是人牙頭",
+      "language": "zh",
+      "transcribe_time": 0.910090446472168
+    },
+    {
+      "segment_id": 2,
+      "start": 29.49471875,
+      "end": 37.392218750000005,
+      "speaker": "SPEAKER_01",
+      "text": "我们再去医院看了一下说是牙有一个牙坏了要拔但是他现在血糖血还没控得下来",
+      "language": "zh",
+      "transcribe_time": 1.7345142364501953
+    },
+    {
+      "segment_id": 3,
+      "start": 41.96534375,
+      "end": 44.90159375,
+      "speaker": "SPEAKER_00",
+      "text": "好的要等其他行程当初",
+      "language": "zh",
+      "transcribe_time": 0.9394159317016602
+    },
+    {
+      "segment_id": 4,
+      "start": 45.44159375,
+      "end": 50.82471875,
+      "speaker": "SPEAKER_01",
+      "text": "就许这个要控制住在时间的牙肯和这种情况下它能吃点什么药吗",
+      "language": "zh",
+      "transcribe_time": 1.4605791568756104
+    },
+    {
+      "segment_id": 5,
+      "start": 54.03096875,
+      "end": 63.649718750000005,
+      "speaker": "SPEAKER_00",
+      "text": "那您當時去到醫院裡醫生給您所謂的控制的藥理有設計到指頭或者是膠炎的藥物嗎",
+      "language": "zh",
+      "transcribe_time": 1.9044840335845947
+    },
+    {
+      "segment_id": 6,
+      "start": 64.25721875,
+      "end": 70.83846875,
+      "speaker": "SPEAKER_01",
+      "text": "没有给我们开任何用就说要回来把写汤写就把酱炸来然后再去拔牙",
+      "language": "zh",
+      "transcribe_time": 1.6099317073822021
+    },
+    {
+      "segment_id": 7,
+      "start": 71.32784375,
+      "end": 75.37784375000001,
+      "speaker": "SPEAKER_00",
+      "text": "那你现在再做积极的血压血糖的调整吗",
+      "language": "zh",
+      "transcribe_time": 1.1944961547851562
+    },
+    {
+      "segment_id": 8,
+      "start": 75.79971875000001,
+      "end": 83.54534375,
+      "speaker": "SPEAKER_01",
+      "text": "是啊,學長姐糖都下來了所以要把那個S7.0也要停藥宇宙我們還沒到時間",
+      "language": "zh",
+      "transcribe_time": 1.5458838939666748
+    },
+    {
+      "segment_id": 9,
+      "start": 86.93721875,
+      "end": 99.12096875,
+      "speaker": "SPEAKER_00",
+      "text": "您現在確認您現在的牙桶是絕對的牙齒的問題而不是比如說心臟疾病、膽痔疾病等等造成了一些牽扯痛 是吧",
+      "language": "zh",
+      "transcribe_time": 2.381373882293701
+    },
+    {
+      "segment_id": 10,
+      "start": 100.70721875000001,
+      "end": 106.25909375,
+      "speaker": "SPEAKER_01",
+      "text": "如果做成千扯痛的话,会有其他的感觉吗?",
+      "language": "zh",
+      "transcribe_time": 1.1131470203399658
+    },
+    {
+      "segment_id": 11,
+      "start": 108.31784375000001,
+      "end": 112.57034375,
+      "speaker": "SPEAKER_00",
+      "text": "但是你需要除外新港新角兔或者其他的一些",
+      "language": "zh",
+      "transcribe_time": 1.0363867282867432
+    },
+    {
+      "segment_id": 12,
+      "start": 114.78096875000001,
+      "end": 118.34159375,
+      "speaker": "SPEAKER_00",
+      "text": "一些放手通或者是牵扯到的一些桶套",
+      "language": "zh",
+      "transcribe_time": 1.1049420833587646
+    }
+  ]
+}

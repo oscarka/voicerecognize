@@ -1,0 +1,322 @@
+=== Whisper + Pyannote 快速测试结果 ===
+
+音频文件: short_test_audio.wav
+说话人数量: 2
+语音片段数: 32
+Whisper模型: small
+Pyannote模型: pyannote/speaker-diarization-3.1
+
+处理时间:
+  whisper_load: 5.79秒
+  pyannote_load: 3.38秒
+  diarization: 452.41秒
+  total_transcription: 249.09秒
+
+转录结果:
+==================================================
+[16.4s - 17.6s] SPEAKER_00: 你好 我是醫生
+[18.2s - 18.9s] SPEAKER_01: 硬家椒表面ial道具苦力好表面鼻子加蛋
+[19.7s - 20.7s] SPEAKER_00: 你好
+[20.1s - 21.7s] SPEAKER_01: 您好 您可以自询了
+[22.2s - 26.7s] SPEAKER_01: 我想弄一下就是我们家老人有高血糖高血压
+[26.9s - 29.1s] SPEAKER_01: 现在这端子的牙疼
+[29.5s - 37.4s] SPEAKER_01: 我们再去医院看了一下说是牙有一个牙坏了要拔但是他现在血糖血压还没空得下来
+[37.5s - 39.0s] SPEAKER_01: 这就现在加控制
+[39.9s - 40.0s] SPEAKER_00: 
+[41.2s - 41.6s] SPEAKER_00: Thank you.
+[42.0s - 44.9s] SPEAKER_00: 好的嗯 嗯請你請你什麼幫助
+[42.5s - 43.5s] SPEAKER_01: UHN? Thiiene
+[45.4s - 50.8s] SPEAKER_01: 这里在咱家控制时的牙疼在这种情况下咱们能吃点什么药吗
+[50.8s - 51.1s] SPEAKER_00: 
+[52.0s - 52.2s] SPEAKER_00: 
+[53.0s - 53.8s] SPEAKER_00: 
+[54.0s - 63.6s] SPEAKER_00: 您当时去医院里医生给您的所谓的控制的药里有涉及到止疼的或者是胶炎的药吗
+[64.3s - 70.8s] SPEAKER_01: 他没有给我们开任何药就说要回来把血糖写下来然后再去拔牙
+[71.3s - 75.4s] SPEAKER_00: 那您现在再做积极的血压血糖的调整吗
+[75.8s - 83.5s] SPEAKER_01: 是 血壓解堂都下來了但是說要把那個R4P0也要停要一週我們還沒到時間
+[86.9s - 99.1s] SPEAKER_00: 您现在确认您现在的牙疼是绝对的牙齿的问题而不是比如说心脏疾病 胆囊疾病等等造成了一些牵扯痛是吧
+[100.7s - 106.3s] SPEAKER_01: 如果说造成这种牵扯痛的话它会有其他的感觉吗
+[106.3s - 106.3s] SPEAKER_00: 
+[106.3s - 106.5s] SPEAKER_00: 감사합니다.
+[107.4s - 107.4s] SPEAKER_01: 
+[107.4s - 108.1s] SPEAKER_00: Children's schools,出現 Better concern than they may have.
+[108.1s - 108.1s] SPEAKER_01: 
+[108.3s - 108.3s] SPEAKER_01: 
+[108.3s - 112.6s] SPEAKER_00: 但是你需要除外心肛心脚痛或者其他的一些
+[113.1s - 114.6s] SPEAKER_00: 一併造成的
+[114.8s - 118.3s] SPEAKER_00: 一些放射桶或者是牵扯到的一些糖炮
+[119.5s - 119.9s] SPEAKER_00: Thank you, sir.
+
+==================================================
+JSON格式结果:
+{
+  "audio_file": "short_test_audio.wav",
+  "total_speakers": 2,
+  "total_segments": 32,
+  "whisper_model": "small",
+  "pyannote_model": "pyannote/speaker-diarization-3.1",
+  "processing_times": {
+    "whisper_load": 5.794489145278931,
+    "pyannote_load": 3.3761420249938965,
+    "diarization": 452.4097101688385,
+    "total_transcription": 249.0913302898407
+  },
+  "transcriptions": [
+    {
+      "segment_id": 0,
+      "start": 16.41659375,
+      "end": 17.58096875,
+      "speaker": "SPEAKER_00",
+      "text": "你好 我是醫生",
+      "transcribe_time": 7.35849404335022
+    },
+    {
+      "segment_id": 1,
+      "start": 18.188468750000002,
+      "end": 18.94784375,
+      "speaker": "SPEAKER_01",
+      "text": "硬家椒表面ial道具苦力好表面鼻子加蛋",
+      "transcribe_time": 18.876421213150024
+    },
+    {
+      "segment_id": 2,
+      "start": 19.69034375,
+      "end": 20.669093750000002,
+      "speaker": "SPEAKER_00",
+      "text": "你好",
+      "transcribe_time": 4.583161115646362
+    },
+    {
+      "segment_id": 3,
+      "start": 20.06159375,
+      "end": 21.68159375,
+      "speaker": "SPEAKER_01",
+      "text": "您好 您可以自询了",
+      "transcribe_time": 5.960966110229492
+    },
+    {
+      "segment_id": 4,
+      "start": 22.238468750000003,
+      "end": 26.65971875,
+      "speaker": "SPEAKER_01",
+      "text": "我想弄一下就是我们家老人有高血糖高血压",
+      "transcribe_time": 6.68677020072937
+    },
+    {
+      "segment_id": 5,
+      "start": 26.91284375,
+      "end": 29.07284375,
+      "speaker": "SPEAKER_01",
+      "text": "现在这端子的牙疼",
+      "transcribe_time": 5.358850002288818
+    },
+    {
+      "segment_id": 6,
+      "start": 29.49471875,
+      "end": 37.392218750000005,
+      "speaker": "SPEAKER_01",
+      "text": "我们再去医院看了一下说是牙有一个牙坏了要拔但是他现在血糖血压还没空得下来",
+      "transcribe_time": 7.424878835678101
+    },
+    {
+      "segment_id": 7,
+      "start": 37.47659375,
+      "end": 39.02909375,
+      "speaker": "SPEAKER_01",
+      "text": "这就现在加控制",
+      "transcribe_time": 4.961766004562378
+    },
+    {
+      "segment_id": 8,
+      "start": 39.923468750000005,
+      "end": 40.024718750000005,
+      "speaker": "SPEAKER_00",
+      "text": "",
+      "transcribe_time": 5.169993162155151
+    },
+    {
+      "segment_id": 9,
+      "start": 41.22284375,
+      "end": 41.57721875,
+      "speaker": "SPEAKER_00",
+      "text": "Thank you.",
+      "transcribe_time": 5.522560119628906
+    },
+    {
+      "segment_id": 10,
+      "start": 41.96534375,
+      "end": 44.90159375,
+      "speaker": "SPEAKER_00",
+      "text": "好的嗯 嗯請你請你什麼幫助",
+      "transcribe_time": 8.430670022964478
+    },
+    {
+      "segment_id": 11,
+      "start": 42.454718750000005,
+      "end": 43.53471875,
+      "speaker": "SPEAKER_01",
+      "text": "UHN? Thiiene",
+      "transcribe_time": 20.201202869415283
+    },
+    {
+      "segment_id": 12,
+      "start": 45.44159375,
+      "end": 50.82471875,
+      "speaker": "SPEAKER_01",
+      "text": "这里在咱家控制时的牙疼在这种情况下咱们能吃点什么药吗",
+      "transcribe_time": 6.7779669761657715
+    },
+    {
+      "segment_id": 13,
+      "start": 50.84159375,
+      "end": 51.111593750000004,
+      "speaker": "SPEAKER_00",
+      "text": "",
+      "transcribe_time": 4.774309873580933
+    },
+    {
+      "segment_id": 14,
+      "start": 51.955343750000004,
+      "end": 52.157843750000005,
+      "speaker": "SPEAKER_00",
+      "text": "",
+      "transcribe_time": 5.026579856872559
+    },
+    {
+      "segment_id": 15,
+      "start": 52.984718750000006,
+      "end": 53.76096875,
+      "speaker": "SPEAKER_00",
+      "text": "",
+      "transcribe_time": 4.988703012466431
+    },
+    {
+      "segment_id": 16,
+      "start": 54.03096875,
+      "end": 63.649718750000005,
+      "speaker": "SPEAKER_00",
+      "text": "您当时去医院里医生给您的所谓的控制的药里有涉及到止疼的或者是胶炎的药吗",
+      "transcribe_time": 8.199218988418579
+    },
+    {
+      "segment_id": 17,
+      "start": 64.25721875,
+      "end": 70.83846875,
+      "speaker": "SPEAKER_01",
+      "text": "他没有给我们开任何药就说要回来把血糖写下来然后再去拔牙",
+      "transcribe_time": 7.052867650985718
+    },
+    {
+      "segment_id": 18,
+      "start": 71.32784375,
+      "end": 75.37784375000001,
+      "speaker": "SPEAKER_00",
+      "text": "那您现在再做积极的血压血糖的调整吗",
+      "transcribe_time": 5.809376955032349
+    },
+    {
+      "segment_id": 19,
+      "start": 75.79971875000001,
+      "end": 83.54534375,
+      "speaker": "SPEAKER_01",
+      "text": "是 血壓解堂都下來了但是說要把那個R4P0也要停要一週我們還沒到時間",
+      "transcribe_time": 6.81694221496582
+    },
+    {
+      "segment_id": 20,
+      "start": 86.93721875,
+      "end": 99.12096875,
+      "speaker": "SPEAKER_00",
+      "text": "您现在确认您现在的牙疼是绝对的牙齿的问题而不是比如说心脏疾病 胆囊疾病等等造成了一些牵扯痛是吧",
+      "transcribe_time": 9.138991117477417
+    },
+    {
+      "segment_id": 21,
+      "start": 100.70721875000001,
+      "end": 106.25909375,
+      "speaker": "SPEAKER_01",
+      "text": "如果说造成这种牵扯痛的话它会有其他的感觉吗",
+      "transcribe_time": 5.7899088859558105
+    },
+    {
+      "segment_id": 22,
+      "start": 106.25909375,
+      "end": 106.27596875,
+      "speaker": "SPEAKER_00",
+      "text": "",
+      "transcribe_time": 2.1716229915618896
+    },
+    {
+      "segment_id": 23,
+      "start": 106.32659375,
+      "end": 106.51221875,
+      "speaker": "SPEAKER_00",
+      "text": "감사합니다.",
+      "transcribe_time": 4.935899972915649
+    },
+    {
+      "segment_id": 24,
+      "start": 107.40659375000001,
+      "end": 107.44034375000001,
+      "speaker": "SPEAKER_01",
+      "text": "",
+      "transcribe_time": 2.2016897201538086
+    },
+    {
+      "segment_id": 25,
+      "start": 107.44034375000001,
+      "end": 108.06471875000001,
+      "speaker": "SPEAKER_00",
+      "text": "Children's schools,出現 Better concern than they may have.",
+      "transcribe_time": 39.96316385269165
+    },
+    {
+      "segment_id": 26,
+      "start": 108.06471875000001,
+      "end": 108.09846875000001,
+      "speaker": "SPEAKER_01",
+      "text": "",
+      "transcribe_time": 2.9702937602996826
+    },
+    {
+      "segment_id": 27,
+      "start": 108.30096875000001,
+      "end": 108.31784375000001,
+      "speaker": "SPEAKER_01",
+      "text": "",
+      "transcribe_time": 3.216515064239502
+    },
+    {
+      "segment_id": 28,
+      "start": 108.31784375000001,
+      "end": 112.57034375,
+      "speaker": "SPEAKER_00",
+      "text": "但是你需要除外心肛心脚痛或者其他的一些",
+      "transcribe_time": 6.1948957443237305
+    },
+    {
+      "segment_id": 29,
+      "start": 113.05971875,
+      "end": 114.56159375,
+      "speaker": "SPEAKER_00",
+      "text": "一併造成的",
+      "transcribe_time": 5.0669779777526855
+    },
+    {
+      "segment_id": 30,
+      "start": 114.78096875000001,
+      "end": 118.34159375,
+      "speaker": "SPEAKER_00",
+      "text": "一些放射桶或者是牵扯到的一些糖炮",
+      "transcribe_time": 5.976323843002319
+    },
+    {
+      "segment_id": 31,
+      "start": 119.45534375000001,
+      "end": 119.87721875000001,
+      "speaker": "SPEAKER_00",
+      "text": "Thank you, sir.",
+      "transcribe_time": 11.48334813117981
+    }
+  ]
+}

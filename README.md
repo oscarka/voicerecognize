@@ -1,148 +1,229 @@
-# VoiceRecognize - 语音识别项目
+# VoiceRecognize 语音识别项目
 
-这是一个基于OpenAI Whisper和Pyannote.audio的语音识别项目，支持多语言语音转录和说话人分离。
+一个基于Whisper和Pyannote的本地语音识别和说话人分离工具，支持批量处理音频文件。
 
-## 功能特性
+## 🚀 快速开始
 
-- 🎤 **语音转录**: 使用OpenAI Whisper进行高精度语音转文本
-- 👥 **说话人分离**: 使用Pyannote.audio识别不同说话人
-- 🌍 **多语言支持**: 支持中文、英文等多种语言
-- ⚡ **本地运行**: 完全本地化，无需云端服务
-- 📊 **详细分析**: 提供转录时间、说话人统计等详细信息
+### 系统要求
+- macOS 10.15+ / Linux / Windows
+- Python 3.11
+- Conda (推荐) 或 pip
 
-## 项目结构
+### 安装步骤
+
+1. **克隆项目**
+```bash
+git clone https://github.com/oscarka/voicerecognize.git
+cd voicerecognize
+```
+
+2. **创建环境**
+```bash
+conda create -n voicerecognize python=3.11
+conda activate voicerecognize
+```
+
+3. **安装依赖**
+```bash
+pip install -r requirements.txt
+conda install -c conda-forge ffmpeg
+```
+
+4. **启动应用**
+```bash
+python app_batch.py
+```
+
+5. **访问界面**
+打开浏览器访问：http://localhost:5002
+
+## 📁 项目结构
 
 ```
 voicerecognize/
-├── README.md                    # 项目说明
-├── .gitignore                   # Git忽略文件
-├── requirements.txt             # Python依赖
-├── whisper_test.py             # Whisper环境测试
-├── whisper_example.py          # Whisper使用示例
-├── whisper_simple_test.py      # 简单Whisper测试
-├── whisper_pyannote_real.py    # Whisper + Pyannote完整实现
-├── whisper_with_simple_diarization.py  # 简化说话人分离演示
-├── transcribe_test.py          # 转录测试脚本
-├── demo_whisper.py             # Whisper演示脚本
-├── quick_test.py               # 快速测试脚本
-├── README_whisper.md           # Whisper详细说明
-├── real_vs_demo_comparison.md  # 真实结果与演示对比
-└── FireRedASR/                 # FireRedASR相关文件
-    ├── test_fireredasr.py
-    ├── test_with_audio.py
-    ├── long_audio_processor.py
-    ├── test_fireredasr_official.py
-    ├── test_single_segment.py
-    └── final_comparison_report.md
+├── app_batch.py              # 批量处理主应用
+├── app.py                    # 单文件处理应用
+├── requirements.txt           # Python依赖
+├── README.md                 # 项目说明
+├── .gitignore               # Git忽略文件
+├── templates/               # Web界面模板
+│   ├── index.html          # 单文件处理界面
+│   └── batch_index.html    # 批量处理界面
+├── uploads/                # 上传文件目录
+├── processed/              # 处理结果目录
+├── temp/                   # 临时文件目录
+├── FireRedASR/            # FireRedASR项目
+├── build_scripts/          # 打包脚本
+│   ├── build_mac_app.py   # Mac应用打包
+│   ├── create_mac_app.py  # 轻量版打包
+│   ├── package_app.py     # 完整版打包
+│   └── create_dmg.py      # DMG创建
+├── test_files/            # 测试文件
+│   ├── whisper_*.py       # Whisper测试脚本
+│   ├── transcribe_*.py    # 转录测试脚本
+│   ├── *.txt             # 测试结果
+│   └── *.wav             # 测试音频
+└── archive/               # 归档文件
+    ├── whisper_pyannote_*.py  # Pyannote集成脚本
+    ├── *.app/            # Mac应用文件
+    ├── *.dmg             # DMG安装包
+    └── *.md              # 文档文件
 ```
 
-## 环境要求
+## 🎯 核心功能
 
-- Python 3.8-3.11
-- FFmpeg
-- PyTorch
-- OpenAI Whisper
-- Pyannote.audio (可选，用于说话人分离)
+### ✅ 语音识别
+- 支持多种Whisper模型 (tiny/base/small/medium/large)
+- 自动语言检测
+- 高质量转录输出
 
-## 快速开始
+### ✅ 说话人分离
+- 基于Pyannote.audio
+- 自动识别说话人
+- 时间戳标注
 
-### 1. 环境设置
+### ✅ 批量处理
+- 多文件同时处理
+- 断点续传功能
+- 实时进度显示
 
+### ✅ Web界面
+- 拖拽上传文件
+- 实时进度监控
+- 结果预览和下载
+
+## 🔧 使用方法
+
+### 批量处理
+1. 启动应用：`python app_batch.py`
+2. 打开浏览器：http://localhost:5002
+3. 拖拽音频文件到上传区域
+4. 选择Whisper模型和参数
+5. 点击"开始批量处理"
+6. 实时查看进度和结果
+
+### 单文件处理
+1. 启动应用：`python app.py`
+2. 打开浏览器：http://localhost:5001
+3. 上传单个音频文件
+4. 选择模型和参数
+5. 查看转录结果
+
+## 📊 性能优化
+
+### 硬件建议
+- **CPU**: 多核处理器（推荐8核以上）
+- **内存**: 16GB 或更多
+- **GPU**: 支持CUDA的NVIDIA显卡（可选）
+- **存储**: SSD硬盘
+
+### 软件优化
+- 使用较小的Whisper模型（tiny/base）提高速度
+- 设置合适的最小时长参数
+- 分批处理大文件
+- 关闭不必要的后台应用
+
+## 🔄 模型管理
+
+### 首次使用
+应用会自动下载必要的模型文件：
+- **Whisper模型**: 约2GB
+- **Pyannote模型**: 约30MB
+- **HuggingFace缓存**: 约8GB
+
+### 模型位置
+- Whisper: `~/.cache/whisper/`
+- Pyannote: `~/.cache/torch/pyannote/`
+- HuggingFace: `~/.cache/huggingface/`
+
+## 🛠️ 开发工具
+
+### 测试脚本
 ```bash
-# 创建conda环境
-conda create -n whisper python=3.11
-conda activate whisper
+# 测试Whisper安装
+python test_files/whisper_test.py
 
-# 安装FFmpeg
-conda install -c conda-forge ffmpeg
+# 测试转录功能
+python test_files/transcribe_test.py
 
-# 安装依赖
-pip install -U openai-whisper
-pip install "numpy<2"
-pip install psutil
-pip install pyannote.audio  # 可选，用于说话人分离
+# 测试不同模型
+python test_files/whisper_example.py
 ```
 
-### 2. 基本使用
-
+### 打包脚本
 ```bash
-# 测试环境
-python whisper_test.py
+# 创建Mac应用
+python build_scripts/create_mac_app.py
 
-# 简单转录
-python whisper_simple_test.py
+# 创建完整版应用
+python build_scripts/package_app.py
 
-# 完整Whisper + Pyannote (需要HF_TOKEN)
+# 创建DMG安装包
+python build_scripts/create_dmg.py
+```
+
+## 🔧 故障排除
+
+### 常见问题
+
+#### 1. 模型下载失败
+```bash
+# 手动下载Whisper模型
+python -c "import whisper; whisper.load_model('base')"
+```
+
+#### 2. Pyannote授权问题
+```bash
+# 设置HuggingFace Token
 export HF_TOKEN="your_token_here"
-python whisper_pyannote_real.py
 ```
 
-## 模型说明
-
-### Whisper模型
-- **tiny**: 最快，适合实时应用
-- **base**: 平衡速度和准确性
-- **small**: 推荐使用，准确性好
-- **medium**: 更高准确性，但较慢
-- **large**: 最高准确性，但需要更多资源
-
-### Pyannote模型
-- **speaker-diarization-3.1**: 说话人分离模型
-- **segmentation-3.0**: 语音分割模型
-
-## 使用示例
-
-### 基本转录
-```python
-import whisper
-
-# 加载模型
-model = whisper.load_model("small")
-
-# 转录音频
-result = model.transcribe("audio.wav")
-print(result["text"])
+#### 3. 端口被占用
+```bash
+# 修改端口
+python app_batch.py --port 5003
 ```
 
-### 说话人分离 + 转录
-```python
-from pyannote.audio import Pipeline
-import whisper
+#### 4. 内存不足
+- 使用较小的模型（tiny/base）
+- 分批处理文件
+- 增加系统内存
 
-# 初始化Pipeline
-pipeline = Pipeline.from_pretrained(
-    "pyannote/speaker-diarization-3.1",
-    use_auth_token="your_token"
-)
+## 📝 版本历史
 
-# 说话人分离
-diarization = pipeline("audio.wav")
+### v1.0 (当前版本)
+- ✅ 基础语音识别功能
+- ✅ 批量文件处理
+- ✅ 说话人分离
+- ✅ Web界面
+- ✅ Mac应用打包
+- ✅ 项目结构整理
 
-# 对每个片段进行转录
-whisper_model = whisper.load_model("small")
-for turn, _, speaker in diarization.itertracks(yield_label=True):
-    # 提取音频片段并转录
-    # ...
-```
+### 计划功能
+- 🔄 GPU加速优化
+- 🔄 更多模型支持
+- 🔄 云端处理选项
+- 🔄 移动端支持
 
-## 测试结果
+## 🤝 贡献指南
 
-项目包含多个测试脚本和结果文件：
-- `whisper_simple_result.txt`: Whisper转录结果
-- `whisper_pyannote_real_result.txt`: 完整转录结果
-- `real_vs_demo_comparison.md`: 结果分析
+1. Fork 项目
+2. 创建功能分支
+3. 提交更改
+4. 推送到分支
+5. 创建 Pull Request
 
-## 注意事项
+## 📄 许可证
 
-1. **模型文件**: 首次运行会自动下载模型文件，需要网络连接
-2. **HF_TOKEN**: 使用Pyannote需要HuggingFace访问令牌
-3. **内存要求**: 大模型需要较多内存和GPU资源
-4. **音频格式**: 支持常见音频格式，建议使用WAV格式
+本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情。
 
-## 许可证
+## 📞 技术支持
 
-本项目基于MIT许可证开源。
+如有问题，请：
+1. 查看 [Issues](../../issues)
+2. 查看项目文档
+3. 联系开发者
 
-## 贡献
+---
 
-欢迎提交Issue和Pull Request来改进项目！ 
+**注意**: 首次使用需要下载模型文件，请确保网络连接稳定并有足够的磁盘空间。 

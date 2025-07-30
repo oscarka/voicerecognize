@@ -65,4 +65,20 @@ Thumbs.db
 
 # 结果文件（可选，根据需要调整）
 # *.txt
-# *.json 
+# *.json
+
+# Mac应用文件
+*.app/
+*.dmg
+
+# 测试音频文件
+test_files/*.wav
+test_files/*.mp3
+test_files/*.m4a
+test_files/*.flac
+test_files/*.aac
+
+# 缓存目录
+uploads/
+processed/
+temp/ 

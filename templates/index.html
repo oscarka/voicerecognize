@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whisper + Pyannote 语音识别</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .control-panel {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group select, .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group select:focus, .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+            width: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .progress-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            display: none;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e1e5e9;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            text-align: center;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .result-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            display: none;
+        }
+
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e1e5e9;
+        }
+
+        .result-title {
+            font-size: 1.5em;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .result-stats {
+            display: flex;
+            gap: 20px;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .transcription-list {
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .transcription-item {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid #667eea;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .transcription-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .speaker {
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+
+        .time-range {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .transcription-text {
+            color: #333;
+            line-height: 1.6;
+            font-size: 1.1em;
+        }
+
+        .error-message {
+            background: #fee;
+            color: #c33;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #c33;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .audio-info {
+            background: #e8f4fd;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2196f3;
+        }
+
+        .audio-info h3 {
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+
+        .audio-info p {
+            color: #666;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎤 Whisper + Pyannote</h1>
+            <p>语音识别与说话人分离系统</p>
+        </div>
+
+        <div class="content">
+            <!-- 音频信息 -->
+            <div class="audio-info" id="audioInfo">
+                <h3>📁 音频文件信息</h3>
+                <p id="audioStatus">正在检查音频文件...</p>
+            </div>
+
+            <!-- 控制面板 -->
+            <div class="control-panel">
+                <h2>⚙️ 处理设置</h2>
+                <div class="form-group">
+                    <label for="modelSelect">Whisper模型:</label>
+                    <select id="modelSelect">
+                        <option value="tiny">Tiny (最快, 39M)</option>
+                        <option value="base" selected>Base (平衡, 74M)</option>
+                        <option value="small">Small (推荐, 244M)</option>
+                        <option value="medium">Medium (高质量, 769M)</option>
+                        <option value="large">Large (最高质量, 1550M)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="minDuration">最小时长 (秒):</label>
+                    <input type="number" id="minDuration" value="2.0" min="0.5" max="10" step="0.5">
+                </div>
+                <button class="btn" id="startBtn" onclick="startProcessing()">
+                    🚀 开始处理
+                </button>
+            </div>
+
+            <!-- 进度显示 -->
+            <div class="progress-section" id="progressSection">
+                <h2>📊 处理进度</h2>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-text" id="progressText">准备中...</div>
+            </div>
+
+            <!-- 结果显示 -->
+            <div class="result-section" id="resultSection">
+                <div class="result-header">
+                    <div class="result-title">📝 转录结果</div>
+                    <div class="result-stats" id="resultStats"></div>
+                </div>
+                <div class="transcription-list" id="transcriptionList"></div>
+            </div>
+
+            <!-- 错误信息 -->
+            <div class="error-message" id="errorMessage" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script>
+        let statusInterval;
+
+        // 页面加载时检查音频文件
+        window.onload = function() {
+            checkAudioFile();
+        };
+
+        // 检查音频文件
+        async function checkAudioFile() {
+            try {
+                const response = await fetch('/api/audio_info');
+                const data = await response.json();
+                
+                const audioStatus = document.getElementById('audioStatus');
+                if (data.exists) {
+                    const duration = Math.round(data.duration);
+                    const size = (data.size / 1024 / 1024).toFixed(1);
+                    audioStatus.innerHTML = `
+                        ✅ 音频文件已找到<br>
+                        📊 文件大小: ${size} MB<br>
+                        ⏱️ 时长: ${duration} 秒
+                    `;
+                } else {
+                    audioStatus.innerHTML = '❌ 音频文件不存在';
+                    document.getElementById('startBtn').disabled = true;
+                }
+            } catch (error) {
+                console.error('检查音频文件失败:', error);
+            }
+        }
+
+        // 开始处理
+        async function startProcessing() {
+            const model = document.getElementById('modelSelect').value;
+            const minDuration = parseFloat(document.getElementById('minDuration').value);
+            
+            // 禁用按钮
+            document.getElementById('startBtn').disabled = true;
+            document.getElementById('startBtn').innerHTML = '<span class="loading-spinner"></span>启动中...';
+            
+            // 隐藏错误信息
+            document.getElementById('errorMessage').style.display = 'none';
+            
+            // 显示进度区域
+            document.getElementById('progressSection').style.display = 'block';
+            document.getElementById('resultSection').style.display = 'none';
+            
+            try {
+                const response = await fetch('/api/process', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        model: model,
+                        min_duration: minDuration
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.error) {
+                    showError(data.error);
+                    resetButton();
+                    return;
+                }
+                
+                // 开始轮询状态
+                startStatusPolling();
+                
+            } catch (error) {
+                showError('网络错误: ' + error.message);
+                resetButton();
+            }
+        }
+
+        // 开始轮询状态
+        function startStatusPolling() {
+            statusInterval = setInterval(async () => {
+                try {
+                    const response = await fetch('/api/status');
+                    const status = await response.json();
+                    
+                    updateProgress(status);
+                    
+                    if (!status.running && status.result) {
+                        // 处理完成
+                        clearInterval(statusInterval);
+                        showResult(status.result);
+                        resetButton();
+                    } else if (!status.running && status.error) {
+                        // 处理出错
+                        clearInterval(statusInterval);
+                        showError(status.error);
+                        resetButton();
+                    }
+                    
+                } catch (error) {
+                    console.error('获取状态失败:', error);
+                }
+            }, 1000);
+        }
+
+        // 更新进度
+        function updateProgress(status) {
+            const progressFill = document.getElementById('progressFill');
+            const progressText = document.getElementById('progressText');
+            
+            progressFill.style.width = status.progress + '%';
+            progressText.innerHTML = status.current_step;
+        }
+
+        // 显示结果
+        function showResult(result) {
+            const resultSection = document.getElementById('resultSection');
+            const resultStats = document.getElementById('resultStats');
+            const transcriptionList = document.getElementById('transcriptionList');
+            
+            // 更新统计信息
+            resultStats.innerHTML = `
+                <span>👥 说话人: ${result.total_speakers}</span>
+                <span>📝 片段: ${result.total_segments}</span>
+                <span>⏱️ 总时间: ${(result.processing_times.diarization + result.processing_times.total_transcription).toFixed(1)}s</span>
+            `;
+            
+            // 清空转录列表
+            transcriptionList.innerHTML = '';
+            
+            // 添加转录结果
+            result.transcriptions.forEach(trans => {
+                const item = document.createElement('div');
+                item.className = 'transcription-item';
+                
+                const startTime = Math.floor(trans.start);
+                const endTime = Math.floor(trans.end);
+                
+                item.innerHTML = `
+                    <div class="transcription-header">
+                        <span class="speaker">${trans.speaker}</span>
+                        <span class="time-range">${startTime}s - ${endTime}s</span>
+                    </div>
+                    <div class="transcription-text">${trans.text}</div>
+                `;
+                
+                transcriptionList.appendChild(item);
+            });
+            
+            resultSection.style.display = 'block';
+        }
+
+        // 显示错误
+        function showError(message) {
+            const errorMessage = document.getElementById('errorMessage');
+            errorMessage.innerHTML = `❌ ${message}`;
+            errorMessage.style.display = 'block';
+        }
+
+        // 重置按钮
+        function resetButton() {
+            document.getElementById('startBtn').disabled = false;
+            document.getElementById('startBtn').innerHTML = '🚀 开始处理';
+        }
+    </script>
+</body>
+</html> 
