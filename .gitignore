@@ -8,6 +8,9 @@ models/
 pretrained_models/
 FireRedASR/pretrained_models/
 
+# FireRedASR项目（包含大量模型文件）
+FireRedASR/
+
 # 音频文件
 *.wav
 *.mp3
